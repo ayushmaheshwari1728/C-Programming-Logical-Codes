@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int max(int a,int b)
+{
+   return (a>b)?a:b; 
+}
+
+int knapsack(int w[],int p[],int n,int v)
+{
+    if(n==0)
+    return 0;
+    
+    else if(w[n-1]<=v)
+    {
+        return max(p[n-1]+knapsack(w,p,n-1,v-w[n-1]),knapsack(w,p,n-1,v));
+    }
+    
+    else
+    {
+    return knapsack(w,p,n-1,v);    
+    }
+    
+}
+
+int main()
+{
+    //sample linked list
+    
+    int result;
+    int weight[]={3,2,1,4,5};
+    int profit[]={10,12,19,20,24};
+    int num_items=5;
+    int max_weight=2;
+    
+    result=knapsack(weight,profit,num_items,max_weight);
+    
+    printf("\nMaximum profit = %d ",result);
+
+    return 0;
+}
