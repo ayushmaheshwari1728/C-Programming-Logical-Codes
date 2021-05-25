@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct listnode{
+    
+    int data;
+    struct listnode *next;
+};
+
+typedef struct listnode list;
+
+
+int find_middle(list *head)
+{
+    list *slow_ptr=head,*fast_ptr=head;
+    
+    while(fast_ptr && fast_ptr->next)
+    {
+        slow_ptr=slow_ptr->next;
+        fast_ptr=fast_ptr->next->next;
+    }
+    
+    return slow_ptr->data;
+}
+
+
+int main()
+{
+    //sample linked list
+    list *head=(list *)malloc(sizeof(list));
+    head->data=11;
+    head->next=(list *)malloc(sizeof(list));
+    head->next->data=2;
+    head->next->next=(list *)malloc(sizeof(list));
+    head->next->next->data=9;
+    head->next->next->next=(list *)malloc(sizeof(list));
+    head->next->next->next->data=4;
+    head->next->next->next->next=(list *)malloc(sizeof(list));
+    head->next->next->next->next->data=7;
+    head->next->next->next->next->next=NULL;
+    
+    
+    
+    int result=find_middle(head);
+    
+    printf("\nMiddle  Element = %d ",result);
+
+    return 0;
+}
